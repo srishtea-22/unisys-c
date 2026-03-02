@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 import org.sonar.flex.checks.utils.Expression;
 
 @Rule(key = "S127")
@@ -44,8 +44,8 @@ public class VariantStopConditionInForLoopCheck extends FlexCheck {
       FlexGrammar.SUB_STATEMENT,
 
       FlexGrammar.ASSIGNMENT_EXPR,
-      FlexPunctuator.DOUBLE_PLUS,
-      FlexPunctuator.DOUBLE_MINUS);
+      CPunctuator.DOUBLE_PLUS,
+      CPunctuator.DOUBLE_MINUS);
   }
 
   @Override
@@ -64,7 +64,7 @@ public class VariantStopConditionInForLoopCheck extends FlexCheck {
       counters.addAll(pendingCounters);
       pendingCounters.clear();
 
-    } else if (!counters.isEmpty() && astNode.is(FlexGrammar.ASSIGNMENT_EXPR, FlexPunctuator.DOUBLE_PLUS, FlexPunctuator.DOUBLE_MINUS)) {
+    } else if (!counters.isEmpty() && astNode.is(FlexGrammar.ASSIGNMENT_EXPR, CPunctuator.DOUBLE_PLUS, CPunctuator.DOUBLE_MINUS)) {
       checkIfModifyingCounter(astNode);
     }
   }
@@ -79,7 +79,7 @@ public class VariantStopConditionInForLoopCheck extends FlexCheck {
       for (Token t : assignmentExpr.getTokens()) {
 
         String tokenValue = t.getValue();
-        if (FlexPunctuator.LPARENTHESIS.getValue().equals(tokenValue) || FlexPunctuator.DOT.getValue().equals(tokenValue)) {
+        if (CPunctuator.LPARENTHESIS.getValue().equals(tokenValue) || CPunctuator.DOT.getValue().equals(tokenValue)) {
           addIssue("Calculate the stop condition value outside the loop and set it to a variable.", assignmentExpr);
           break;
         }
@@ -92,7 +92,7 @@ public class VariantStopConditionInForLoopCheck extends FlexCheck {
    */
   @Nullable
   private static AstNode getStopCondition(AstNode forStatement) {
-    AstNode semicolonNode = forStatement.getFirstChild(FlexPunctuator.SEMICOLON);
+    AstNode semicolonNode = forStatement.getFirstChild(CPunctuator.SEMICOLON);
 
     if (semicolonNode != null) {
       AstNode stopConditionExpr = semicolonNode.getNextAstNode();
@@ -105,7 +105,7 @@ public class VariantStopConditionInForLoopCheck extends FlexCheck {
     AstNode varNode = null;
     if (expression.is(FlexGrammar.ASSIGNMENT_EXPR) && expression.hasDirectChildren(FlexGrammar.ASSIGNMENT_OPERATOR)) {
       varNode = expression.getFirstChild();
-    } else if (expression.is(FlexPunctuator.DOUBLE_PLUS, FlexPunctuator.DOUBLE_MINUS)) {
+    } else if (expression.is(CPunctuator.DOUBLE_PLUS, CPunctuator.DOUBLE_MINUS)) {
       AstNode exprParent = expression.getParent();
       varNode = exprParent.is(FlexGrammar.UNARY_EXPR) ? exprParent.getLastChild() : exprParent.getFirstChild();
     }

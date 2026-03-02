@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "SwitchWithoutDefault")
 public class SwitchWithoutDefaultCheck extends FlexCheck {
@@ -38,7 +38,7 @@ public class SwitchWithoutDefaultCheck extends FlexCheck {
     AstNode defaultCaseElement = null;
     for (AstNode caseElementNode : astNode.getChildren(FlexGrammar.CASE_ELEMENT)) {
       for (AstNode caseLabelNode : caseElementNode.getChildren(FlexGrammar.CASE_LABEL)) {
-        if (caseLabelNode.getFirstChild().is(FlexKeyword.DEFAULT)) {
+        if (caseLabelNode.getFirstChild().is(CKeyword.DEFAULT)) {
           defaultCaseElement = caseElementNode;
           break;
         }

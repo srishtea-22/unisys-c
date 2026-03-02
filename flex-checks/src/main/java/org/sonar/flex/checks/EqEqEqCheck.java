@@ -22,19 +22,19 @@ import java.util.Arrays;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 
 @Rule(key = "S1440")
 public class EqEqEqCheck extends FlexCheck {
 
   @Override
   public List<AstNodeType> subscribedTo() {
-    return Arrays.asList(FlexPunctuator.EQUAL2, FlexPunctuator.NOTEQUAL1);
+    return Arrays.asList(CPunctuator.EQUAL2, CPunctuator.NOTEQUAL1);
   }
 
   @Override
   public void visitNode(AstNode astNode) {
-    if (astNode.is(FlexPunctuator.EQUAL2)) {
+    if (astNode.is(CPunctuator.EQUAL2)) {
       addIssue("Replace == with ===", astNode);
     } else {
       addIssue("Replace != with !==", astNode);

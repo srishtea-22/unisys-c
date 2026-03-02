@@ -32,7 +32,7 @@ import com.sonar.sslr.api.TokenType;
  * override
  * static
  */
-public enum FlexKeyword implements TokenType {
+public enum CKeyword implements TokenType {
   // Unisys C keywords
   ASM("asm"),
   AUTO("auto"),
@@ -105,7 +105,7 @@ public enum FlexKeyword implements TokenType {
 
   private final String value;
 
-  FlexKeyword(String value) {
+  CKeyword(String value) {
     this.value = value;
   }
 
@@ -125,7 +125,7 @@ public enum FlexKeyword implements TokenType {
   }
 
   public static String[] keywordValues() {
-    FlexKeyword[] keywordsEnum = FlexKeyword.values();
+    CKeyword[] keywordsEnum = CKeyword.values();
     String[] keywords = new String[keywordsEnum.length];
     for (int i = 0; i < keywords.length; i++) {
       keywords[i] = keywordsEnum[i].getValue();

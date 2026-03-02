@@ -22,8 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CKeyword;
+import org.sonar.flex.CPunctuator;
 import org.sonar.flex.FlexVisitor;
 
 public class ComplexityVisitor extends FlexVisitor {
@@ -46,10 +46,10 @@ public class ComplexityVisitor extends FlexVisitor {
       FlexGrammar.FOR_STATEMENT,
       FlexGrammar.WHILE_STATEMENT,
       FlexGrammar.DO_STATEMENT,
-      FlexKeyword.CASE,
+      CKeyword.CASE,
 
       // Expressions
-      FlexPunctuator.QUERY,
+      CPunctuator.QUERY,
       FlexGrammar.LOGICAL_AND_OPERATOR,
       FlexGrammar.LOGICAL_OR_OPERATOR);
   }

@@ -24,7 +24,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 
 @Rule(key = "S1438")
 public class SemicolonCheck extends FlexCheck {
@@ -37,7 +37,7 @@ public class SemicolonCheck extends FlexCheck {
   @Override
   public void visitNode(AstNode astNode) {
     Token lastToken = astNode.getLastToken();
-    if (lastToken == null || !FlexPunctuator.SEMICOLON.getValue().equals(lastToken.getValue())) {
+    if (lastToken == null || !CPunctuator.SEMICOLON.getValue().equals(lastToken.getValue())) {
       addIssue("Add a semicolon at the end of this statement", astNode.getParent().getLastToken());
     }
   }

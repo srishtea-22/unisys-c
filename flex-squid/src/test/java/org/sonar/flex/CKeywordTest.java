@@ -22,7 +22,7 @@ import org.sonar.sslr.parser.LexerlessGrammar;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.sonar.sslr.tests.Assertions.assertThat;
 
-public class FlexKeywordTest {
+public class CKeywordTest {
 
   private final LexerlessGrammar g = FlexGrammar.createGrammar();
 
@@ -75,7 +75,7 @@ public class FlexKeywordTest {
       .matches("while")
       .matches("with");
 
-    assertThat(FlexKeyword.keywords()).hasSize(42);
-    assertThat(FlexKeyword.values()).hasSize(42 + /* syntactic: */ 12);
+    assertThat(CKeyword.keywords()).hasSize(42);
+    assertThat(CKeyword.values()).hasSize(42 + /* syntactic: */ 12);
   }
 }

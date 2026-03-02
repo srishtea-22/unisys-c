@@ -35,15 +35,15 @@ import org.sonar.api.batch.sensor.cpd.NewCpdTokens;
 import org.sonar.api.batch.sensor.highlighting.NewHighlighting;
 import org.sonar.api.batch.sensor.highlighting.TypeOfText;
 import org.sonar.flex.FlexVisitor;
-import org.sonar.flex.api.FlexKeyword;
-import org.sonar.flex.api.FlexPunctuator;
+import org.sonar.flex.api.CKeyword;
+import org.sonar.flex.api.CPunctuator;
 import org.sonar.flex.api.FlexTokenType;
 
 public class FlexTokensVisitor extends FlexVisitor {
 
   private static final String NORMALIZED_CHARACTER_LITERAL = "$CHARS";
   private static final String NORMALIZED_NUMERIC_LITERAL = "$NUMBER";
-  private static final Set<FlexKeyword> KEYWORDS = EnumSet.allOf(FlexKeyword.class);
+  private static final Set<CKeyword> KEYWORDS = EnumSet.allOf(CKeyword.class);
 
   private final SensorContext context;
   private final Lexer lexer;
@@ -74,11 +74,11 @@ public class FlexTokensVisitor extends FlexVisitor {
     while (iterator.hasNext()) {
       Token token = iterator.next();
       TokenType tokenType = token.getType();
-      if (tokenType.equals(FlexKeyword.IMPORT)) {
+      if (tokenType.equals(CKeyword.IMPORT)) {
         importDirective = true;
       } else if (importDirective) {
         // We do nothing as we want to ignore "import" directives
-        if (tokenType.equals(FlexPunctuator.SEMI)) {
+        if (tokenType.equals(CPunctuator.SEMI)) {
           importDirective = false;
         }
       } else if (!tokenType.equals(GenericTokenType.EOF)) {

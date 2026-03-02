@@ -20,11 +20,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class FlexPunctuatorTest {
+public class CKeywordTest {
 
   @Test
   public void test() {
-    assertThat(FlexPunctuator.values().length).isEqualTo(51);
+    assertThat(CKeyword.values().length).isEqualTo(40);
+    assertThat(CKeyword.keywordValues().length).isEqualTo(CKeyword.values().length);
   }
 
 }

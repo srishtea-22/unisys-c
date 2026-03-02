@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 
 @Rule(key = "S108")
 public class EmptyNestedBlockCheck extends FlexCheck {
@@ -49,7 +49,7 @@ public class EmptyNestedBlockCheck extends FlexCheck {
   }
 
   private static boolean hasComment(AstNode blockNode) {
-    return blockNode.getFirstChild(FlexPunctuator.RCURLYBRACE).getToken().hasTrivia();
+    return blockNode.getFirstChild(CPunctuator.RCURLYBRACE).getToken().hasTrivia();
   }
 
 }

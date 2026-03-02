@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexCommentAnalyser;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonarsource.analyzer.commons.recognizers.CodeRecognizer;
 import org.sonarsource.analyzer.commons.recognizers.ContainsDetector;
 import org.sonarsource.analyzer.commons.recognizers.Detector;
@@ -50,7 +50,7 @@ public class CommentedCodeCheck extends FlexCheck {
     public Set<Detector> getDetectors() {
       return Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
         new EndWithDetector(0.95, '}', ';', '{'),
-        new KeywordsDetector(0.3, FlexKeyword.keywordValues()),
+        new KeywordsDetector(0.3, CKeyword.keywordValues()),
         new ContainsDetector(0.95, "++", "--"),
         new ContainsDetector(0.95, "*=", "/=", "%=", "+=", "-=", "<<=", ">>=", ">>>=", "&=", "^=", "|="),
         new ContainsDetector(0.95, "==", "!=", "===", "!=="))));

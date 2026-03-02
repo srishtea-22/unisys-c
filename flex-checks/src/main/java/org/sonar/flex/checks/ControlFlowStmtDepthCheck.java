@@ -26,7 +26,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 /**
  * Note that implementation differs from AbstractNestedIfCheck - see SONARPLUGINS-1855 and SONARPLUGINS-2178
@@ -82,7 +82,7 @@ public class ControlFlowStmtDepthCheck extends FlexCheck {
 
   private static boolean isElseIf(AstNode astNode) {
     return astNode.getParent().getParent().getPreviousSibling() != null
-      && astNode.getParent().getParent().getPreviousSibling().is(FlexKeyword.ELSE);
+      && astNode.getParent().getParent().getPreviousSibling().is(CKeyword.ELSE);
   }
 
 }

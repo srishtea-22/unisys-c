@@ -20,7 +20,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 public class Function {
 
@@ -34,7 +34,7 @@ public class Function {
 
   public static boolean isAccessor(AstNode functionDef) {
     Preconditions.checkState(functionDef.is(FlexGrammar.FUNCTION_DEF));
-    return functionDef.getFirstChild(FlexGrammar.FUNCTION_NAME).getFirstChild(FlexKeyword.GET, FlexKeyword.SET) != null;
+    return functionDef.getFirstChild(FlexGrammar.FUNCTION_NAME).getFirstChild(CKeyword.GET, CKeyword.SET) != null;
   }
 
 
@@ -80,7 +80,7 @@ public class Function {
       for (AstNode attribute : attributesNode.getChildren()) {
         if (attribute.getFirstChild().is(FlexGrammar.ATTRIBUTE_EXPR)
           && attribute.getFirstChild().getNumberOfChildren() == 1
-          && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(FlexKeyword.OVERRIDE.getValue())) {
+          && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(CKeyword.OVERRIDE.getValue())) {
           return true;
         }
       }

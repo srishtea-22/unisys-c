@@ -27,7 +27,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Function;
 
 @Rule(key = "S1185")
@@ -107,7 +107,7 @@ public class FunctionOnlyCallsSuperCheck extends FlexCheck {
       for (AstNode attribute : attributesNode.getChildren()) {
         if (attribute.getFirstChild().is(FlexGrammar.ATTRIBUTE_EXPR)
           && attribute.getFirstChild().getNumberOfChildren() == 1
-          && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(FlexKeyword.OVERRIDE.getValue())) {
+          && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(CKeyword.OVERRIDE.getValue())) {
           return true;
         }
       }
@@ -123,8 +123,8 @@ public class FunctionOnlyCallsSuperCheck extends FlexCheck {
     }
 
     String actual = sb.toString();
-    String expected = FlexKeyword.SUPER.getValue() + "." + methodName + "(" + String.join(",", parameters) + ");";
+    String expected = CKeyword.SUPER.getValue() + "." + methodName + "(" + String.join(",", parameters) + ");";
 
-    return actual.equals(expected) || actual.equals(FlexKeyword.RETURN.getValue() + expected);
+    return actual.equals(expected) || actual.equals(CKeyword.RETURN.getValue() + expected);
   }
 }

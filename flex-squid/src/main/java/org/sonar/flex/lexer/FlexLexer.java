@@ -23,8 +23,8 @@ import com.sonar.sslr.impl.channel.IdentifierAndKeywordChannel;
 import com.sonar.sslr.impl.channel.PunctuatorChannel;
 import com.sonar.sslr.impl.channel.UnknownCharacterChannel;
 import java.nio.charset.Charset;
-import org.sonar.flex.api.FlexKeyword;
-import org.sonar.flex.api.FlexPunctuator;
+import org.sonar.flex.api.CKeyword;
+import org.sonar.flex.api.CPunctuator;
 import org.sonar.flex.api.FlexTokenType;
 import org.sonar.sslr.channel.Channel;
 import org.sonar.sslr.channel.CodeReader;
@@ -65,8 +65,8 @@ public final class FlexLexer {
       .withChannel(regexp(FlexTokenType.NUMERIC_LITERAL, "\\.[0-9]++" + EXP + "?+"))
       .withChannel(regexp(FlexTokenType.NUMERIC_LITERAL, "[0-9]++" + EXP + "?+"))
 
-      .withChannel(new IdentifierAndKeywordChannel("\\p{javaJavaIdentifierStart}++\\p{javaJavaIdentifierPart}*+", true, FlexKeyword.values()))
-      .withChannel(new PunctuatorChannel(FlexPunctuator.values()))
+      .withChannel(new IdentifierAndKeywordChannel("\\p{javaJavaIdentifierStart}++\\p{javaJavaIdentifierPart}*+", true, CKeyword.values()))
+      .withChannel(new PunctuatorChannel(CPunctuator.values()))
 
       .withChannel(new UnknownCharacterChannel())
 

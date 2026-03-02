@@ -28,7 +28,7 @@ import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Modifiers;
 
@@ -78,7 +78,7 @@ public class PrivateStaticConstLoggerCheck extends FlexCheck {
           .getFirstChild(FlexGrammar.TYPED_IDENTIFIER)
           .getFirstChild(FlexGrammar.IDENTIFIER);
         Set<AstNodeType> modifiers = Modifiers.getModifiers(directive.getFirstChild(FlexGrammar.ATTRIBUTES));
-        boolean isPrivateStaticConst = modifiers.contains(FlexKeyword.PRIVATE) && modifiers.contains(FlexKeyword.STATIC) && isConst(variableDef);
+        boolean isPrivateStaticConst = modifiers.contains(CKeyword.PRIVATE) && modifiers.contains(CKeyword.STATIC) && isConst(variableDef);
 
         reportIssue(isPrivateStaticConst, pattern.matcher(identifierNode.getTokenValue()).matches(), variableBindingNode);
       }
@@ -106,7 +106,7 @@ public class PrivateStaticConstLoggerCheck extends FlexCheck {
   }
 
   private static boolean isConst(AstNode variableDef) {
-    return variableDef.getFirstChild(FlexGrammar.VARIABLE_DEF_KIND).getFirstChild().is(FlexKeyword.CONST);
+    return variableDef.getFirstChild(FlexGrammar.VARIABLE_DEF_KIND).getFirstChild().is(CKeyword.CONST);
   }
 
   private static boolean isVariableDeclaration(AstNode directive) {

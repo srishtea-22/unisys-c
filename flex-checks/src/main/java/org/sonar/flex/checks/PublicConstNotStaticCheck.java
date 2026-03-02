@@ -25,7 +25,7 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Modifiers;
 import org.sonar.flex.checks.utils.Variable;
@@ -44,7 +44,7 @@ public class PublicConstNotStaticCheck extends FlexCheck {
       if (Variable.isConst(directive)) {
         Set<AstNodeType> varModifiers = Modifiers.getModifiers(directive.getFirstChild(FlexGrammar.ATTRIBUTES));
 
-        if (varModifiers.contains(FlexKeyword.PUBLIC) && !varModifiers.contains(FlexKeyword.STATIC)) {
+        if (varModifiers.contains(CKeyword.PUBLIC) && !varModifiers.contains(CKeyword.STATIC)) {
           String name = Variable.getName(directive.getFirstChild(FlexGrammar.ANNOTABLE_DIRECTIVE).getFirstChild());
           addIssue(MessageFormat.format("Make this const field \"{0}\" static too", name), directive);
         }

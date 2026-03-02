@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "S1066")
 public class CollapsibleIfStatementCheck extends FlexCheck {
@@ -66,6 +66,6 @@ public class CollapsibleIfStatementCheck extends FlexCheck {
   }
 
   private static boolean hasElseClause(AstNode astNode) {
-    return astNode.hasDirectChildren(FlexKeyword.ELSE);
+    return astNode.hasDirectChildren(CKeyword.ELSE);
   }
 }

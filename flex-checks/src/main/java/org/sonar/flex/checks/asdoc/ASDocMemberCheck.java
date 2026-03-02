@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.ASDocCheck;
 import org.sonar.flex.checks.utils.Function;
 import org.sonar.flex.checks.utils.Modifiers;
@@ -193,7 +193,7 @@ public class ASDocMemberCheck {
     if (returnType == null) {
       return true;
     }
-    return returnType.getLastChild().is(FlexKeyword.VOID);
+    return returnType.getLastChild().is(CKeyword.VOID);
   }
 
   private static String getParamName(String paramDoc) {

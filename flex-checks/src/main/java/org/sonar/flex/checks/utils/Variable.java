@@ -20,7 +20,7 @@ import com.sonar.sslr.api.AstNode;
 import java.util.ArrayList;
 import java.util.List;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 public final class Variable {
 
@@ -46,7 +46,7 @@ public final class Variable {
         return variableDecStmt
           .getFirstChild(FlexGrammar.VARIABLE_DEF)
           .getFirstChild(FlexGrammar.VARIABLE_DEF_KIND)
-          .getFirstChild().is(FlexKeyword.VAR);
+          .getFirstChild().is(CKeyword.VAR);
       }
     }
     return false;
@@ -61,7 +61,7 @@ public final class Variable {
         return variableDecStmt
           .getFirstChild(FlexGrammar.VARIABLE_DEF)
           .getFirstChild(FlexGrammar.VARIABLE_DEF_KIND)
-          .getFirstChild().is(FlexKeyword.CONST);
+          .getFirstChild().is(CKeyword.CONST);
       }
     }
     return false;

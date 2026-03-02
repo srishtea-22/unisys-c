@@ -26,7 +26,7 @@ import java.util.Map;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Expression;
 
 @Rule(key = "S1950")
@@ -45,7 +45,7 @@ public class DuplicateSwitchCaseConditionCheck extends FlexCheck {
     for (AstNode caseElement : astNode.getChildren(FlexGrammar.CASE_ELEMENT)) {
       for (AstNode caseLabel : caseElement.getChildren(FlexGrammar.CASE_LABEL)) {
 
-        if (!caseLabel.getFirstChild().is(FlexKeyword.DEFAULT)) {
+        if (!caseLabel.getFirstChild().is(CKeyword.DEFAULT)) {
           checkCondition(caseLabel);
         }
       }

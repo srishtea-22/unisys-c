@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "S4524")
 public class DefaultCasePositionCheck extends FlexCheck {
@@ -39,7 +39,7 @@ public class DefaultCasePositionCheck extends FlexCheck {
     int nbCase = 0;
     for (AstNode caseElement : astNode.getChildren(FlexGrammar.CASE_ELEMENT)) {
       for (AstNode caseLabel : caseElement.getChildren(FlexGrammar.CASE_LABEL)) {
-        if (previous != null && nbCase > 1 && previous.getFirstChild().is(FlexKeyword.DEFAULT)) {
+        if (previous != null && nbCase > 1 && previous.getFirstChild().is(CKeyword.DEFAULT)) {
           addIssue("Move this \"default\" clause to the beginning or end of this \"switch\" statement.", previous);
           return;
         }

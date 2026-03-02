@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Function;
 import org.sonar.flex.checks.utils.Modifiers;
@@ -102,7 +102,7 @@ public class LocalVarShadowsFieldCheck extends FlexCheck {
   }
 
   private static boolean isStatic(AstNode functionDef) {
-    return Modifiers.getModifiers(functionDef.getParent().getPreviousAstNode()).contains(FlexKeyword.STATIC);
+    return Modifiers.getModifiers(functionDef.getParent().getPreviousAstNode()).contains(CKeyword.STATIC);
   }
 
   private static boolean isAccessor(AstNode functionDef) {

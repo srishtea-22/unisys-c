@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 import static java.util.Collections.singletonList;
 
@@ -121,14 +121,14 @@ class ConditionalStructure {
     branches.add(branchAndContentIf(node, node.getFirstChild(FlexGrammar.SUB_STATEMENT)));
     AstNode currentIfStatement = node;
 
-    while (currentIfStatement.hasDirectChildren(FlexKeyword.ELSE)) {
+    while (currentIfStatement.hasDirectChildren(CKeyword.ELSE)) {
       AstNode elseStatement = currentIfStatement.getLastChild(FlexGrammar.SUB_STATEMENT).getFirstChild(FlexGrammar.STATEMENT);
       if (elseStatement != null && elseStatement.hasDirectChildren(FlexGrammar.IF_STATEMENT)) {
         currentIfStatement = elseStatement.getFirstChild(FlexGrammar.IF_STATEMENT);
         visitedIfStatements.add(currentIfStatement);
         branches.add(branchAndContentIf(currentIfStatement, currentIfStatement.getFirstChild(FlexGrammar.SUB_STATEMENT)));
       } else {
-        AstNode theElse = currentIfStatement.getFirstChild(FlexKeyword.ELSE);
+        AstNode theElse = currentIfStatement.getFirstChild(CKeyword.ELSE);
         if (theElse != null) {
           branches.add(branchAndContentIf(theElse, currentIfStatement.getLastChild(FlexGrammar.SUB_STATEMENT)));
         }
@@ -151,7 +151,7 @@ class ConditionalStructure {
       }
       branches.add(branchAndContentSwitch(caseElement, directives));
       for (AstNode caseLabelNode : caseElement.getChildren(FlexGrammar.CASE_LABEL)) {
-        if (caseLabelNode.hasDirectChildren(FlexKeyword.DEFAULT)) {
+        if (caseLabelNode.hasDirectChildren(CKeyword.DEFAULT)) {
           allBranchesArePresent = true;
         }
       }

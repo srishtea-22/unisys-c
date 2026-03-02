@@ -24,7 +24,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "S1466")
 public class ExactSettingsSetToFalseCheck extends FlexCheck {
@@ -98,7 +98,7 @@ public class ExactSettingsSetToFalseCheck extends FlexCheck {
       result = Symbol.EXACT_SETTINGS;
     } else if ("=".equals(value)) {
       result = Symbol.EQUAL;
-    } else if (FlexKeyword.FALSE.getValue().equals(value)) {
+    } else if (CKeyword.FALSE.getValue().equals(value)) {
       result = Symbol.FALSE;
     }
 

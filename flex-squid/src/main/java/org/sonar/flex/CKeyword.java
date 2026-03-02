@@ -23,7 +23,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import org.sonar.sslr.grammar.GrammarRuleKey;
 
-public enum FlexKeyword implements GrammarRuleKey {
+public enum CKeyword implements GrammarRuleKey {
   // Unisys C keywords
   ASM,
   AUTO,
@@ -114,27 +114,27 @@ public enum FlexKeyword implements GrammarRuleKey {
 
   private final boolean syntactic;
 
-  FlexKeyword() {
+  CKeyword() {
     this(false);
   }
 
-  FlexKeyword(boolean syntactic) {
+  CKeyword(boolean syntactic) {
     this.syntactic = syntactic;
   }
 
   public static String[] keywordValues() {
-    String[] keywordsValue = new String[FlexKeyword.values().length];
+    String[] keywordsValue = new String[CKeyword.values().length];
     int i = 0;
-    for (FlexKeyword keyword : FlexKeyword.values()) {
+    for (CKeyword keyword : CKeyword.values()) {
       keywordsValue[i] = keyword.getValue();
       i++;
     }
     return keywordsValue;
   }
 
-  public static List<FlexKeyword> keywords() {
+  public static List<CKeyword> keywords() {
     return Collections.unmodifiableList(Arrays.stream(values())
-      .filter(flexKeyword -> !flexKeyword.syntactic)
+      .filter(CKeyword -> !CKeyword.syntactic)
       .collect(Collectors.toList()));
   }
 

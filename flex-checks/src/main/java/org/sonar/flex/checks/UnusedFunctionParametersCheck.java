@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Function;
 import org.sonar.flex.checks.utils.Preconditions;
 
@@ -154,7 +154,7 @@ public class UnusedFunctionParametersCheck extends FlexCheck {
 
   private static Boolean implementsAnInterface(AstNode classDef) {
     AstNode inheritenceNode = classDef.getFirstChild(FlexGrammar.INHERITENCE);
-    return inheritenceNode != null && inheritenceNode.getFirstChild().is(FlexKeyword.IMPLEMENTS);
+    return inheritenceNode != null && inheritenceNode.getFirstChild().is(CKeyword.IMPLEMENTS);
   }
 
   private boolean isInClassImplementingInterface() {

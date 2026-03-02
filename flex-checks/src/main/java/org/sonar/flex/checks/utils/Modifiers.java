@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.annotation.Nullable;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 public final class Modifiers {
 
@@ -48,7 +48,7 @@ public final class Modifiers {
 
   public static boolean isNonPublic(Set<AstNodeType> modifiers) {
     for (AstNodeType modifier : modifiers) {
-      if (modifier.equals(FlexKeyword.INTERNAL) || modifier.equals(FlexKeyword.PROTECTED) || modifier.equals(FlexKeyword.PRIVATE)) {
+      if (modifier.equals(CKeyword.INTERNAL) || modifier.equals(CKeyword.PROTECTED) || modifier.equals(CKeyword.PRIVATE)) {
         return true;
       }
     }
@@ -57,7 +57,7 @@ public final class Modifiers {
 
   public static boolean isPublic(AstNode attriutes) {
     Set<AstNodeType> modifiers = getModifiers(attriutes);
-    return modifiers.contains(FlexKeyword.PUBLIC) || !isNonPublic(modifiers);
+    return modifiers.contains(CKeyword.PUBLIC) || !isNonPublic(modifiers);
   }
 
 }

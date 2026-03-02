@@ -14,17 +14,17 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.flex;
+package org.sonar.flex.api;
 
 import org.junit.jupiter.api.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class FlexPunctuatorTest {
+public class CPunctuatorTest {
 
   @Test
   public void test() {
-    assertThat(FlexPunctuator.values()).hasSize(55);
+    assertThat(CPunctuator.values().length).isEqualTo(51);
   }
 
 }

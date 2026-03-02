@@ -14,11 +14,12 @@
  * You should have received a copy of the Sonar Source-Available License
  * along with this program; if not, see https://sonarsource.com/license/ssal/
  */
-package org.sonar.flex;
+package org.sonar.flex.api;
 
-import org.sonar.sslr.grammar.GrammarRuleKey;
+import com.sonar.sslr.api.AstNode;
+import com.sonar.sslr.api.TokenType;
 
-public enum FlexPunctuator implements GrammarRuleKey {
+public enum CPunctuator implements TokenType {
   // Unisys C operators and punctuators
   LBRACK("["),
   RBRACK("]"),
@@ -66,57 +67,38 @@ public enum FlexPunctuator implements GrammarRuleKey {
   HASH("#"),
   HASHHASH("##"),
 
-
-  AT_SIGN("@"),
-  DOUBLE_COLON("::"),
-  DOUBLE_DOT(".."),
-  LCURLYBRACE("{"),
-  RCURLYBRACE("}"),
-  LBRAKET("["),
-  RBRAKET("]"),
-  LPARENTHESIS("("),
-  RPARENTHESIS(")"),
-  DOUBLE_PLUS("++"),
-  DOUBLE_MINUS("--"),
-  NOT("!"),
-  EQUAL1("="),
-  EQUAL2("=="),
-  EQUAL3("==="),
-  NOTEQUAL1("!="),
-  NOTEQUAL2("!=="),
-  SR2(">>>"),
-  STAR_EQU("*="),
-  DIV_EQU("/="),
-  MOD_EQU("%="),
-  PLUS_EQU("+="),
-  MINUS_EQU("-="),
-  SL_EQU("<<="),
-  SR_EQU(">>="),
-  SR_EQU2(">>>="),
-  AND_EQU("&="),
-  XOR_EQU("^="),
-  OR_EQU("|="),
-  ANDAND_EQU("&&="),
-  XORXOR_EQU("^^="),
-  OROR_EQU("||="),
-  AND("&"),
-  ANDAND("&&"),
-  XOR("^"),
-  OR("|"),
-  OROR("||"),
-  QUERY("?"),
-  TILD("~"),
-  TRIPLE_DOTS("..."),
-  SEMICOLON(";");
+  LCURLY("{"),
+  RCURLY("}"),
+  DBL_COLON("::"),
+  STRICT_EQUAL("==="),
+  STRICT_NOT_EQUAL("!=="),
+  BSR(">>>"),
+  BSR_ASSIGN(">>>="),
+  LAND_ASSIGN("&&="),
+  LOR_ASSIGN("||="),
+  E4X_ATTRI("@"),
+  SEMI(";"),
+  REST("...");
 
   private final String value;
 
-  FlexPunctuator(String value) {
+  CPunctuator(String value) {
     this.value = value;
   }
 
+  @Override
+  public String getName() {
+    return name();
+  }
+
+  @Override
   public String getValue() {
     return value;
+  }
+
+  @Override
+  public boolean hasToBeSkippedFromAst(AstNode node) {
+    return false;
   }
 
 }

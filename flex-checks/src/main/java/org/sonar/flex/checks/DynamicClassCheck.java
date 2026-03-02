@@ -24,7 +24,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Modifiers;
 
@@ -39,7 +39,7 @@ public class DynamicClassCheck extends FlexCheck {
   @Override
   public void visitNode(AstNode astNode) {
 
-    if (astNode.getPreviousAstNode() != null && Modifiers.getModifiers(astNode.getPreviousAstNode()).contains(FlexKeyword.DYNAMIC)) {
+    if (astNode.getPreviousAstNode() != null && Modifiers.getModifiers(astNode.getPreviousAstNode()).contains(CKeyword.DYNAMIC)) {
       addIssue(MessageFormat.format("Make this \"{0}\" class non-dynamic", Clazz.getName(astNode)), astNode);
     }
   }

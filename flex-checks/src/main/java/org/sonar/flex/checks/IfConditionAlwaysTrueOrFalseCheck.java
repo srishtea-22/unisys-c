@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "S1145")
 public class IfConditionAlwaysTrueOrFalseCheck extends FlexCheck {
@@ -42,8 +42,8 @@ public class IfConditionAlwaysTrueOrFalseCheck extends FlexCheck {
       AstNode condition = conditionalExpr.getFirstChild().getFirstChild();
       if ((condition.is(FlexGrammar.POSTFIX_EXPR)
         && condition.getFirstChild().is(FlexGrammar.PRIMARY_EXPR)
-        && condition.getFirstChild().getFirstChild().is(FlexKeyword.TRUE))
-        || condition.getFirstChild().getFirstChild().is(FlexKeyword.FALSE)) {
+        && condition.getFirstChild().getFirstChild().is(CKeyword.TRUE))
+        || condition.getFirstChild().getFirstChild().is(CKeyword.FALSE)) {
 
         addIssue("Remove this if statement.", astNode);
       }

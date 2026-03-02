@@ -24,7 +24,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Function;
 
 @Rule(key = "S1470")
@@ -83,7 +83,7 @@ public class OverrideEventCloneFunctionCheck extends FlexCheck {
   private static boolean isExtendingEvent(AstNode classDef) {
     AstNode inheritenceNode = classDef.getFirstChild(FlexGrammar.INHERITENCE);
 
-    if (inheritenceNode != null && inheritenceNode.getFirstChild(FlexKeyword.EXTENDS) != null) {
+    if (inheritenceNode != null && inheritenceNode.getFirstChild(CKeyword.EXTENDS) != null) {
       AstNode qualifiedId = inheritenceNode.getFirstChild(FlexGrammar.TYPE_EXPR).getLastChild();
       if (qualifiedId.is(FlexGrammar.QUALIFIED_IDENTIFIER) && EVENT_TYPE_NAME.equals(qualifiedId.getTokenValue())) {
         return true;
@@ -107,7 +107,7 @@ public class OverrideEventCloneFunctionCheck extends FlexCheck {
 
       if (attribute.getFirstChild().is(FlexGrammar.ATTRIBUTE_EXPR)
         && attribute.getFirstChild().getNumberOfChildren() == 1
-        && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(FlexKeyword.OVERRIDE.getValue())) {
+        && attribute.getFirstChild().getFirstChild(FlexGrammar.IDENTIFIER).getTokenValue().equals(CKeyword.OVERRIDE.getValue())) {
         return true;
       }
     }

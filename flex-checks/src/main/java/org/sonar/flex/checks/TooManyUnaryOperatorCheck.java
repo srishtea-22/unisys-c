@@ -24,7 +24,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 
 
 @Rule(key = "S1454")
@@ -37,8 +37,8 @@ public class TooManyUnaryOperatorCheck extends FlexCheck {
   public List<AstNodeType> subscribedTo() {
     return Arrays.asList(
       FlexGrammar.ASSIGNMENT_EXPR,
-      FlexPunctuator.DOUBLE_MINUS,
-      FlexPunctuator.DOUBLE_PLUS);
+      CPunctuator.DOUBLE_MINUS,
+      CPunctuator.DOUBLE_PLUS);
   }
 
   @Override
@@ -50,7 +50,7 @@ public class TooManyUnaryOperatorCheck extends FlexCheck {
   public void visitNode(AstNode astNode) {
     if (astNode.is(FlexGrammar.ASSIGNMENT_EXPR)) {
       assignmentExpression = true;
-    } else if (assignmentExpression && (astNode.is(FlexPunctuator.DOUBLE_MINUS) || astNode.is(FlexPunctuator.DOUBLE_PLUS))) {
+    } else if (assignmentExpression && (astNode.is(CPunctuator.DOUBLE_MINUS) || astNode.is(CPunctuator.DOUBLE_PLUS))) {
       counter++;
     }
   }

@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 
 @Rule(key = "S1435")
 public class StarTypeUseCheck extends FlexCheck {
@@ -36,7 +36,7 @@ public class StarTypeUseCheck extends FlexCheck {
   @Override
   public void visitNode(AstNode astNode) {
     AstNode typeExprNode = astNode.getFirstChild(FlexGrammar.TYPED_IDENTIFIER).getFirstChild(FlexGrammar.TYPE_EXPR);
-    if (typeExprNode != null && typeExprNode.getFirstChild(FlexPunctuator.STAR) != null) {
+    if (typeExprNode != null && typeExprNode.getFirstChild(CPunctuator.STAR) != null) {
       addIssue("Remove usage of this \"star\" type", typeExprNode);
     }
   }

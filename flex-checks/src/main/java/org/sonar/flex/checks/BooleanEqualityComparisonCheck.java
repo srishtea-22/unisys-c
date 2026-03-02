@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 
 @Rule(key = "S1125")
 public class BooleanEqualityComparisonCheck extends FlexCheck {
@@ -43,6 +43,6 @@ public class BooleanEqualityComparisonCheck extends FlexCheck {
   private static boolean hasBooleanLiteralOperand(AstNode astNode) {
     return astNode.is(FlexGrammar.POSTFIX_EXPR)
       && astNode.getFirstChild().is(FlexGrammar.PRIMARY_EXPR)
-      && astNode.getFirstChild().getFirstChild().is(FlexKeyword.TRUE, FlexKeyword.FALSE);
+      && astNode.getFirstChild().getFirstChild().is(CKeyword.TRUE, CKeyword.FALSE);
   }
 }

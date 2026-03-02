@@ -24,7 +24,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 
 @Rule(key = "S1445")
@@ -50,6 +50,6 @@ public class ConstructorWithVoidReturnTypeCheck extends FlexCheck {
       .getFirstChild(FlexGrammar.FUNCTION_SIGNATURE)
       .getFirstChild(FlexGrammar.RESULT_TYPE);
 
-    return resultTypeNode != null && resultTypeNode.getFirstChild(FlexKeyword.VOID) != null;
+    return resultTypeNode != null && resultTypeNode.getFirstChild(CKeyword.VOID) != null;
   }
 }

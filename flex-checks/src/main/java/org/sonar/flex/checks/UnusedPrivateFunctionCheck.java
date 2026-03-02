@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Function;
 import org.sonar.flex.checks.utils.Modifiers;
@@ -58,7 +58,7 @@ public class UnusedPrivateFunctionCheck extends FlexCheck {
       for (AstNode functionDef : Clazz.getFunctions(classDef)) {
 
         if (!Function.isAccessor(functionDef)
-          && Modifiers.getModifiers(functionDef.getPreviousAstNode()).contains(FlexKeyword.PRIVATE)
+          && Modifiers.getModifiers(functionDef.getPreviousAstNode()).contains(CKeyword.PRIVATE)
           && !Function.isEmptyConstructor(functionDef, Clazz.getName(classDef))) {
           AstNode identifierNode = functionDef
             .getFirstChild(FlexGrammar.FUNCTION_NAME)

@@ -25,7 +25,7 @@ import java.util.Set;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Function;
 import org.sonar.flex.checks.utils.Modifiers;
 
@@ -72,8 +72,8 @@ public class MethodVisibilityCheck extends FlexCheck {
   }
 
   private static boolean isVisibility(AstNodeType modifier) {
-    return modifier.equals(FlexKeyword.PUBLIC) || modifier.equals(FlexKeyword.INTERNAL)
-      || modifier.equals(FlexKeyword.PROTECTED) || modifier.equals(FlexKeyword.PRIVATE);
+    return modifier.equals(CKeyword.PUBLIC) || modifier.equals(CKeyword.INTERNAL)
+      || modifier.equals(CKeyword.PROTECTED) || modifier.equals(CKeyword.PRIVATE);
   }
 
 }

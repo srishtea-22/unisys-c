@@ -23,7 +23,7 @@ import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexPunctuator;
+import org.sonar.flex.CPunctuator;
 import org.sonar.flex.checks.utils.Clazz;
 
 @Rule(key = "S1186")
@@ -48,7 +48,7 @@ public class EmptyMethodCheck extends FlexCheck {
   }
 
   private static boolean isEmptyBlock(AstNode block) {
-    AstNode rightCurlyBrace = block.getFirstChild(FlexPunctuator.RCURLYBRACE);
+    AstNode rightCurlyBrace = block.getFirstChild(CPunctuator.RCURLYBRACE);
     return !block.getFirstChild(FlexGrammar.DIRECTIVES).hasChildren() && !hasComment(rightCurlyBrace);
   }
 

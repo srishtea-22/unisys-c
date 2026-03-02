@@ -26,7 +26,7 @@ import org.sonar.colorizer.JavadocTokenizer;
 import org.sonar.colorizer.KeywordsTokenizer;
 import org.sonar.colorizer.StringTokenizer;
 import org.sonar.colorizer.Tokenizer;
-import org.sonar.flex.api.FlexKeyword;
+import org.sonar.flex.api.CKeyword;
 import org.sonar.flex.parser.FlexParser;
 import org.sonar.sslr.toolkit.Toolkit;
 
@@ -49,7 +49,7 @@ public final class FlexToolkit {
       new CDocTokenizer("<span class=\"cd\">", SPAN_END_TAG),
       new JavadocTokenizer("<span class=\"cppd\">", SPAN_END_TAG),
       new CppDocTokenizer("<span class=\"cppd\">", SPAN_END_TAG),
-      new KeywordsTokenizer("<span class=\"k\">", SPAN_END_TAG, FlexKeyword.keywordValues())));
+      new KeywordsTokenizer("<span class=\"k\">", SPAN_END_TAG, CKeyword.keywordValues())));
   }
 
 }

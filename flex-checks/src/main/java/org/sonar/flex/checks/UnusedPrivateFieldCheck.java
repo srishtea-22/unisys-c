@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import org.sonar.check.Rule;
 import org.sonar.flex.FlexCheck;
 import org.sonar.flex.FlexGrammar;
-import org.sonar.flex.FlexKeyword;
+import org.sonar.flex.CKeyword;
 import org.sonar.flex.checks.utils.Clazz;
 import org.sonar.flex.checks.utils.Modifiers;
 import org.sonar.flex.checks.utils.Variable;
@@ -57,7 +57,7 @@ public class UnusedPrivateFieldCheck extends FlexCheck {
 
     private void retrieveAllPrivateFields(AstNode classDef) {
       for (AstNode varDeclaration : Clazz.getFields(classDef)) {
-        if (Modifiers.getModifiers(varDeclaration.getParent().getPreviousAstNode()).contains(FlexKeyword.PRIVATE)) {
+        if (Modifiers.getModifiers(varDeclaration.getParent().getPreviousAstNode()).contains(CKeyword.PRIVATE)) {
           for (AstNode identifier : Variable.getDeclaredIdentifiers(varDeclaration)) {
 
             privateFields.put(identifier.getTokenValue(), new PrivateField(identifier, 0));
