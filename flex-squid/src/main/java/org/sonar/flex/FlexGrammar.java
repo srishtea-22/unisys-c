@@ -245,6 +245,14 @@ public enum FlexGrammar implements GrammarRuleKey {
   XML_PI,
   KEYWORDS,
   REGULAR_EXPRESSION,
+
+  /**
+   * BUILT-IN PREDEFINED FUNCTION NAMES
+   * stdio.h : fopen, fread, fwrite, fclose, printf, scanf
+   * math.h  : all standard C math functions
+   */
+  STDIO_FUNCTION_NAME,
+  MATH_FUNCTION_NAME,
   // </editor-fold>
 
   /**
@@ -500,6 +508,8 @@ public enum FlexGrammar implements GrammarRuleKey {
       THIS,
       REGULAR_EXPRESSION,
       XML_INITIALISER,
+      STDIO_FUNCTION_NAME,
+      MATH_FUNCTION_NAME,
       QUALIFIED_IDENTIFIER,
       RESERVED_NAMESPACE,
       PARENTHESIZED_EXPR,
@@ -660,6 +670,83 @@ public enum FlexGrammar implements GrammarRuleKey {
     b.rule(TYPE_EXPR_NO_IN).is(TYPE_EXPR);
 
     b.rule(VECTOR_LITERAL_EXPRESSION).is(LT, TYPE_EXPR, GT, BRACKETS);
+    b.rule(STDIO_FUNCTION_NAME).is(SPACING, b.firstOf(
+      b.sequence("fopen",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fread",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fwrite", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fclose", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("printf", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scanf",  b.nextNot(IDENTIFIER_PART))
+    ));
+
+     b.rule(MATH_FUNCTION_NAME).is(SPACING, b.firstOf(
+      // Trigonometric
+      b.sequence("acos",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("acosh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("asin",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("asinh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atan2",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atan",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("atanh",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("cos",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("cosh",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sin",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sinh",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tan",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tanh",       b.nextNot(IDENTIFIER_PART)),
+      // Exponential & logarithmic
+      b.sequence("exp2",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("exp",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("expm1",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("frexp",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("ilogb",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("ldexp",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lgamma",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log10",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log1p",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log2",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("logb",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("log",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("modf",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scalbn",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("scalbln",    b.nextNot(IDENTIFIER_PART)),
+      b.sequence("tgamma",     b.nextNot(IDENTIFIER_PART)),
+      // Power & absolute value
+      b.sequence("cbrt",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fabs",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("hypot",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("pow",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("sqrt",       b.nextNot(IDENTIFIER_PART)),
+      // Integer variants (keep longer alternatives first to avoid partial match)
+      b.sequence("llrint",     b.nextNot(IDENTIFIER_PART)),
+      b.sequence("llround",    b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lrint",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("lround",     b.nextNot(IDENTIFIER_PART)),
+      // Rounding
+      b.sequence("ceil",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("floor",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nearbyint",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nextafter",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nexttoward", b.nextNot(IDENTIFIER_PART)),
+      b.sequence("rint",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("round",      b.nextNot(IDENTIFIER_PART)),
+      b.sequence("trunc",      b.nextNot(IDENTIFIER_PART)),
+      // Floating-point manipulation
+      b.sequence("copysign",   b.nextNot(IDENTIFIER_PART)),
+      b.sequence("erf",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("erfc",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fdim",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fma",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmax",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmin",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("fmod",       b.nextNot(IDENTIFIER_PART)),
+      b.sequence("nan",        b.nextNot(IDENTIFIER_PART)),
+      b.sequence("remainder",  b.nextNot(IDENTIFIER_PART)),
+      b.sequence("remquo",     b.nextNot(IDENTIFIER_PART)),
+      // abs is last: short name, must not steal 'acos', 'asin' etc. (those listed above first)
+      b.sequence("abs",        b.nextNot(IDENTIFIER_PART))
+    ));
+    
   }
 
   private static void statements(LexerlessGrammarBuilder b) {
